@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Outlet } from "react-router";
 import "./App.css";
 import Navbar from "./components/layout/Navbar/Navbar";
 
@@ -8,7 +9,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <h1>Fresh off the press!</h1>
+      <Outlet />
     </>
   );
 }
