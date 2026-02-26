@@ -1,6 +1,6 @@
 import styles from "./Navbar.module.css";
 import logo from "../../../assets/images/dogsdowntown-logo.png";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 
 function Navbar() {
   return (
@@ -8,10 +8,15 @@ function Navbar() {
       <Link to="/" aria-label="Home Page">
         <img src={logo} alt="" />
       </Link>
-      <Link to="/" aria-label="Home Page">
-        Home
-      </Link>
-      <Link aria-label="Shop Page">Shop</Link>
+      <div>
+        <NavLink to="/" aria-label="Home Page" className={({ isActive }) => (isActive ? `${styles.navLink} ${styles.active}` : styles.navLink)}>
+          Home
+        </NavLink>
+        <NavLink to="/shop" aria-label="Shop Page" className={styles.navLink}>
+          Shop
+        </NavLink>
+      </div>
+      <div></div>
     </nav>
   );
 }
