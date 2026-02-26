@@ -28,8 +28,12 @@ nav > div:nth-child(2) {
   gap: 10px;
 }
 
-img {
+.logoContainer {
   max-width: 142px;
+}
+
+img {
+  width: 100%;
 }
 
 .navLink {

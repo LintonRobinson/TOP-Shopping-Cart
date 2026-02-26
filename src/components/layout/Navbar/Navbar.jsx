@@ -5,7 +5,7 @@ import { Link, NavLink } from "react-router";
 function Navbar() {
   return (
     <nav>
-      <Link to="/" aria-label="Home Page">
+      <Link to="/" aria-label="Home Page" className={styles.logoContainer}>
         <img src={logo} alt="" />
       </Link>
       <div>
