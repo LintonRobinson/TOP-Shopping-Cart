@@ -23,4 +23,9 @@ describe("Home Page", () => {
   it("renders 'SHOP NOW' button", () => {
     expect(screen.getByRole("link", { name: "SHOP NOW" })).toBeInTheDocument();
   });
+
+  it("renders value prop paragraph", () => {
+    const expectedParagraph = "We believe the things you use every day should be made with care. Every product in our store is selected for its craftsmanship, durability, and timeless design.";
+    expect(screen.getByText(expectedParagraph)).toBeInTheDocument();
+  });
 });
