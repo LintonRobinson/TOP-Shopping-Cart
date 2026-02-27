@@ -25,12 +25,19 @@ section {
   font-weight: 500;
 }
 
+.collectionCard > span {
+  font-size: 1.3rem;
+  color: white;
+  text-decoration: underline;
+}
+
 /******************************************
 /* BASE STYLES
 /*******************************************/
 
 section {
   padding: 40px 25px;
+  margin: 0 auto;
 }
 
 .button {
@@ -40,7 +47,7 @@ section {
   color: inherit;
   border-radius: 4px;
   font-weight: 700;
-  transition: ease 1s;
+  transition: ease 0.5s;
 }
 
 .button:hover {
@@ -50,15 +57,16 @@ section {
   color: inherit;
   border-radius: 4px;
   font-weight: 700;
-  transition: ease 1s;
+  transition: ease 0.5s;
 }
 
 /******************************************
 /* LAYOUT STYLES
 /*******************************************/
 
-.heroSection {
-  min-height: 50vh;
+section.heroSection {
+  width: 100%;
+  min-height: 70vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,7 +81,7 @@ section {
 
 @media (min-width: 650px) {
   .heroSection {
-    min-height: 70vh;
+    min-height: 50vh;
   }
 }
 
@@ -95,6 +103,8 @@ section {
 }
 
 .valuePropSection {
+  max-width: 1300px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -102,7 +112,66 @@ section {
   gap: 30px;
 }
 
+.collectionCardSection {
+  max-width: 1300px;
+  display: flex;
+  gap: 70px;
+}
+
 .collectionCard {
-  height: 500px;
+  display: block;
+  aspect-ratio: 1/1;
   width: 50%;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  opacity: 1;
+  transition: ease 0.5s;
+  text-decoration-color: white;
+  box-shadow: 1px 1px 19px -11px rgba(0, 0, 0, 0.75);
+}
+
+.collectionCard:hover {
+  opacity: 0.9;
+  transition: ease 0.5s;
+}
+
+.collectionCard::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.454);
+  backdrop-filter: blur(2.7px);
+  z-index: 1;
+}
+
+.collectionCard > span {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  text-decoration: underline;
+  z-index: 2;
+  color: white;
+}
+
+.collectionCard:nth-child(1) {
+  background-image: url("../../assets/images/shop-training-background.jpg");
+}
+
+.collectionCard:nth-child(2) {
+  background-image: url("../../assets/images/shop-all-background.png");
+}
+
+@media (max-width: 600px) {
+  .collectionCardSection {
+    flex-direction: column;
+  }
+
+  .collectionCard {
+    width: 100%;
+    background-color: black;
+  }
 }

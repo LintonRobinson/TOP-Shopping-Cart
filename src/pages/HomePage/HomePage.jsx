@@ -14,9 +14,13 @@ function HomePage() {
         <h2>Quality over quantity.</h2>
         <p>We believe the things you use every day should be made with care. Every product in our store is selected for its craftsmanship, durability, and timeless design.</p>
       </section>
-      <section>
-        <Link aria-label="Shop Training Page">Shop Training</Link>
-        <Link aria-label="Shop All Page">Shop Training</Link>
+      <section className={styles.collectionCardSection}>
+        <Link aria-label="Shop Training Page" className={styles.collectionCard}>
+          <span>Shop Training</span>
+        </Link>
+        <Link aria-label="Shop All Page" className={styles.collectionCard}>
+          <span>Shop Training</span>
+        </Link>
       </section>
     </>
   );
