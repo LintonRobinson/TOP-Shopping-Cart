@@ -1,5 +1,5 @@
 import App from "./App";
-import HomePage from "../pages/HomePage/HomePage";
+import HomePage from "./pages/HomePage/HomePage.jsx";
 const routes = [
   {
     path: "/",
