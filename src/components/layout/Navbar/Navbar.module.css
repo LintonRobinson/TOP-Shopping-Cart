@@ -15,6 +15,10 @@ nav {
   justify-content: space-between;
   padding: 7px;
   border-bottom: solid 1px rgb(222, 226, 230);
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background-color: white;
 }
 
 nav > div {

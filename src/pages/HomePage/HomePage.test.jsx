@@ -20,12 +20,17 @@ describe("Home Page", () => {
     expect(screen.getByText("Curated products chosen for safety, performance, and your dog’s long-term success.")).toBeInTheDocument();
   });
 
-  it("renders 'SHOP NOW' button", () => {
-    expect(screen.getByRole("link", { name: "SHOP NOW" })).toBeInTheDocument();
+  it("renders 'Shop All' links ", () => {
+    const shopAllLinks = screen.getAllByRole("link", { name: "Shop All Page" });
+    expect(shopAllLinks).toHaveLength(2);
   });
 
   it("renders value prop paragraph", () => {
     const expectedParagraph = "We believe the things you use every day should be made with care. Every product in our store is selected for its craftsmanship, durability, and timeless design.";
     expect(screen.getByText(expectedParagraph)).toBeInTheDocument();
+  });
+
+  it("renders Shop Training link", () => {
+    expect(screen.getByRole("link", { name: "Shop Training Page" })).toBeInTheDocument();
   });
 });

@@ -12,7 +12,7 @@ function Navbar() {
         <NavLink to="/" aria-label="Home Page" className={({ isActive }) => (isActive ? `${styles.navLink} ${styles.active}` : styles.navLink)}>
           Home
         </NavLink>
-        <NavLink to="/shop" aria-label="Shop Page" className={styles.navLink}>
+        <NavLink to="/shop" aria-label="Shop All Page" className={styles.navLink}>
           Shop
         </NavLink>
       </div>

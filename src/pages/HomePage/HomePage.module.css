@@ -101,3 +101,8 @@ section {
   justify-content: center;
   gap: 30px;
 }
+
+.collectionCard {
+  height: 500px;
+  width: 50%;
+}

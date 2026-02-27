@@ -18,6 +18,6 @@ describe("Navbar", () => {
   });
 
   it("renders Shop link", () => {
-    expect(screen.getByRole("link", { name: "Shop Page" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Shop All Page" })).toBeInTheDocument();
   });
 });
