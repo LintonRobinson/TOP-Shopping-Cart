@@ -116,12 +116,13 @@ section.heroSection {
   max-width: 1300px;
   display: flex;
   gap: 70px;
+  justify-content: center;
 }
 
 .collectionCard {
   display: block;
   aspect-ratio: 1/1;
-  width: 50%;
+  width: 40%;
   background-position: center;
   background-size: cover;
   position: relative;
@@ -129,11 +130,15 @@ section.heroSection {
   transition: ease 0.5s;
   text-decoration-color: white;
   box-shadow: 1px 1px 19px -11px rgba(0, 0, 0, 0.75);
+  border: #196bc1 solid 2px;
+  border-radius: 4px;
+  transform: scale(1);
 }
 
 .collectionCard:hover {
   opacity: 0.9;
   transition: ease 0.5s;
+  transform: scale(1.02);
 }
 
 .collectionCard::after {

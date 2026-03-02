@@ -11,8 +11,8 @@ function HomePage() {
         </Link>
       </section>
       <section className={styles.valuePropSection}>
-        <h2>Quality over quantity.</h2>
-        <p>We believe the things you use every day should be made with care. Every product in our store is selected for its craftsmanship, durability, and timeless design.</p>
+        <h2>Everything your dog needs—picked with care.</h2>
+        <p>High-quality essentials, treats, and gear for city pups (and the people who love them). Easy to shop. Fast to grab. Worth it.</p>
       </section>
       <section className={styles.collectionCardSection}>
         <Link aria-label="Shop Training Page" className={styles.collectionCard}>

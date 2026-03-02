@@ -26,7 +26,7 @@ describe("Home Page", () => {
   });
 
   it("renders value prop paragraph", () => {
-    const expectedParagraph = "We believe the things you use every day should be made with care. Every product in our store is selected for its craftsmanship, durability, and timeless design.";
+    const expectedParagraph = "High-quality essentials, treats, and gear for city pups (and the people who love them). Easy to shop. Fast to grab. Worth it.";
     expect(screen.getByText(expectedParagraph)).toBeInTheDocument();
   });
 
