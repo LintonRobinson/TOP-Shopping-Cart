@@ -1,24 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 function useFetchProducts() {
   const [storeProductsData, setStoreProductsData] = useState(null);
   const [loadingState, setLoadingState] = useState(true);
   const [error, setError] = useState(null);
-  const fetchProductsData = async () => {
-    try {
-      const response = await fetch("https://fakestoreapi.com/products");
-      if (!response.ok) {
-        throw Error("Network error: Something went wrong");
+  useEffect(() => {
+    const fetchProductsData = async () => {
+      try {
+        const response = await fetch("https://fakestoreapi.com/products");
+        if (!response.ok) {
+          throw Error("Network error: Something went wrong");
+        }
+        const fetchedStoreProductsData = await response.json();
+        setStoreProductsData(fetchedStoreProductsData);
+        setLoadingState(false);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoadingState(false);
       }
-      const fetchedStoreProductsData = await response.json();
-      setStoreProductsData(fetchedStoreProductsData);
-      setLoadingState(false);
-    } catch (err) {
-      setError(err);
-    } finally {
-      setLoadingState(false);
-    }
-  };
-  fetchProductsData();
+    };
+    fetchProductsData();
+  }, []);
   return { loadingState, storeProductsData, error };
 }
 
