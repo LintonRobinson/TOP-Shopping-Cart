@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
-import { MemoryRouter } from "react-router";
+import { MemoryRouter, useParams } from "react-router";
 import CategoryPage from "./CategoryPage.jsx";
 import useFetchProducts from "../../hooks/useFetchProducts.js";
 
@@ -24,6 +24,10 @@ describe("CategoryPage", () => {
       image: "http://example2.com",
     },
   ];
+
+  vi.mock("react-router", () => ({
+    useParams: vi.fn(),
+  }));
   vi.mock("../../hooks/useFetchProducts.js");
 
   vi.mock("../../components/ui/ProductCard/ProductCard.jsx", () => ({
@@ -32,23 +36,27 @@ describe("CategoryPage", () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    useParams.mockReturnValue({});
     useFetchProducts.mockReturnValue({ loadingState: false, storeProductsData: mockedStoreProducts, error: null });
   });
 
   describe("heading", () => {
     it("renders 'All Products' as category heading when a category is not passed", () => {
+      useParams.mockReturnValue({ category: "all" });
       render(<CategoryPage />);
       expect(screen.getByText("All Products")).toBeInTheDocument();
     });
 
-    it("renders the passed category as category heading when a category is passed", () => {
-      render(<CategoryPage currentCategory={mockedStoreProducts[0].title} />);
-      expect(screen.getByText(mockedStoreProducts[0].title)).toBeInTheDocument();
+    it("renders the correct category heading when a category is extracted from url param", () => {
+      useParams.mockReturnValue({ category: "training" });
+      render(<CategoryPage />);
+      expect(screen.getByText("Training")).toBeInTheDocument();
     });
   });
 
   describe("product count", () => {
     it("renders the correct number of all products", () => {
+      useParams.mockReturnValue({ category: "all" });
       render(<CategoryPage />);
       const numberOfProductsText = "2 Products";
       expect(screen.getByText(numberOfProductsText)).toBeInTheDocument();
@@ -57,10 +65,9 @@ describe("CategoryPage", () => {
 
   describe("product card", () => {
     it("renders the correct number of product cards", async () => {
+      useParams.mockReturnValue({ category: "all" });
       render(<CategoryPage />);
-      await waitFor(() => {
-        expect(mockedProductCard).toHaveBeenCalledTimes(2);
-      });
+      expect(mockedProductCard).toHaveBeenCalledTimes(2);
     });
   });
 });
