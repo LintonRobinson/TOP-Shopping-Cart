@@ -1,26 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function useFetchCart({ userId }) {
+function useFetchCart() {
   const [userCartData, setUserCartData] = useState(null);
   const [loadingState, setLoadingState] = useState(true);
   const [error, setError] = useState(null);
-  const fetchUserCart = async () => {
-    try {
-      const response = await fetch(`https://fakestoreapi.com/carts/${userId}`);
-      if (!response.ok) {
-        throw Error("Network response was not ok");
+  useEffect(() => {
+    const fetchUserCart = async () => {
+      try {
+        const response = await fetch(`https://fakestoreapi.com/carts/1`);
+        if (!response.ok) {
+          throw Error("Network response was not ok");
+        }
+        const fetchedCartData = await response.json();
+        setUserCartData(fetchedCartData);
+        setLoadingState(false);
+      } catch (err) {
+        setError(err);
+        setLoadingState(false);
+      } finally {
+        setLoadingState(false);
       }
-      const fetchedCartData = await response.json();
-      setUserCartData(fetchedCartData);
-      setLoadingState(false);
-    } catch (err) {
-      setError(err);
-      setLoadingState(false);
-    } finally {
-      setLoadingState(false);
-    }
-  };
-  fetchUserCart();
+    };
+    fetchUserCart();
+  }, []);
   return { loadingState, userCartData, error };
 }
 
