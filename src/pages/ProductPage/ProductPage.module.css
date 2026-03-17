@@ -1,0 +1,176 @@
+/******************************************
+/* TYPOGRAPHY
+/*******************************************/
+* {
+  text-align: left;
+}
+
+section {
+  font-family: "Maven Pro";
+}
+
+.productSectionDesktop h3,
+.productSectionMobile h3 {
+  text-decoration: none;
+  color: #196bc1;
+  max-width: 450px;
+  font-size: 1rem;
+}
+
+.productSectionDesktop h1,
+.productSectionMobile h1 {
+  max-width: 450px;
+}
+
+.productSectionDesktop h2,
+.productSectionMobile h2 {
+  color: rgb(77, 77, 77);
+}
+
+.productSectionDesktop p {
+  max-width: 450px;
+}
+
+.productSectionMobile * {
+  text-align: center;
+}
+
+.button {
+  font-size: 0.85rem;
+}
+
+/******************************************
+/* BASE STYLES
+/*******************************************/
+
+.productSectionWrapper {
+  flex: 1;
+  display: flex;
+}
+
+.productSectionDesktop {
+  display: flex;
+  gap: 75px;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 50px 50px;
+}
+
+section {
+  padding: 0;
+}
+
+.button {
+  background-color: #196bc1;
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  border-radius: 4px;
+  font-weight: 700;
+  transition: ease 0.5s;
+  border: 1.3px solid rgb(0, 0, 0);
+}
+
+.button:hover {
+  background-color: #196ac19d;
+  color: black;
+
+  transition: ease 0.5s;
+}
+
+/******************************************
+/* LAYOUT STYLES
+/*******************************************/
+.productSection {
+}
+
+.productSectionImage {
+  min-width: 50%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+}
+.productSectionImage img {
+  height: 70%;
+  object-fit: contain;
+  object-position: right;
+}
+
+.productDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+.productButtonWrapper {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.productSectionMobile {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 50px 50px;
+}
+
+.productSectionMobile .productDetails {
+  align-items: center;
+  gap: 10px;
+}
+
+.productSectionMobile img {
+  width: 80%;
+  object-position: center;
+}
+@media (max-width: 735px) {
+  .productSectionDesktop {
+    display: none;
+  }
+
+  .productSectionMobile {
+    display: flex;
+  }
+}
+
+.addToCartPopUp {
+  position: absolute;
+  background-color: #ebf5ff;
+  border: #196ac14a 3px solid;
+  border-radius: 4px;
+  padding: 25px;
+  top: 102px;
+  right: 25px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  box-shadow: 0px 0px 20px -17px rgba(0, 0, 0, 0.829);
+  color: #196bc1;
+  animation-name: addToCartPopUp;
+  animation-duration: 5s;
+  animation-timing-function: ease-in-out;
+  opacity: 0;
+}
+
+@keyframes addToCartPopUp {
+  0% {
+    right: -200px;
+    opacity: 1;
+  }
+
+  10% {
+    right: 25px;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
