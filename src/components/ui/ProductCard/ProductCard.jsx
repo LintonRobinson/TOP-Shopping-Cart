@@ -1,11 +1,15 @@
-function ProductCard({ cartProductData }) {
+import styles from "./ProductCard.module.css";
+import { Link, useParams } from "react-router";
+function ProductCard({ productData, productCategory }) {
+  const productCardNavigationPath = `/shop`;
+
   return (
-    <div>
-      <img src={cartProductData.image} alt={cartProductData.title} />
-      <span>{cartProductData.title}</span>
-      <span>{cartProductData.category}</span>
-      <span>{cartProductData.price}</span>
-    </div>
+    <Link to={`/shop/${productCategory}/${productData.id}`} className={styles.productCard}>
+      <img src={productData.image} alt={productData.title} />
+      <span className={styles.productCardTitle}>{productData.title}</span>
+      <span className={styles.productCardCategory}>{productData.category}</span>
+      <span className={styles.productCardPrice}>{`$${productData.price}`}</span>
+    </Link>
   );
 }
 

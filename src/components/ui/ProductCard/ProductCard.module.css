@@ -1,0 +1,58 @@
+/******************************************
+/* TYPOGRAPHY
+/*******************************************/
+
+.productCardTitle {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.productCardCategory {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #196bc1;
+}
+
+.productCardPrice {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #636363;
+}
+/******************************************
+/* LAYOUT STYLES
+/*******************************************/
+
+.productCard {
+  background-color: #ebf5ff;
+  padding: 15px;
+  border: 1.4px solid rgba(88, 88, 88, 0.122);
+  border-radius: 4px;
+  transition: ease 0.3s;
+  box-shadow: 0px 0px 5px -2px #00000033;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 7px;
+
+  text-decoration: none;
+  color: inherit;
+}
+
+.productCard:hover {
+  border: 1.4px solid #196ac195;
+  transition: ease 0.3s;
+}
+
+.productCard img {
+  height: 175px;
+  width: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.productCard span {
+  display: block;
+  width: 100%;
+}
