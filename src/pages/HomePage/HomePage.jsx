@@ -6,7 +6,7 @@ function HomePage() {
       <section className={styles.heroSection}>
         <h1>Premium Supplies for Exceptional Dogs.</h1>
         <p>Curated products chosen for safety, performance, and your dog’s long-term success.</p>
-        <Link className={styles.button} aria-label="Shop All Page">
+        <Link to="/shop/all" className={styles.button} aria-label="Shop All Page">
           SHOP NOW
         </Link>
       </section>
@@ -15,11 +15,11 @@ function HomePage() {
         <p>High-quality essentials, treats, and gear for city pups (and the people who love them). Easy to shop. Fast to grab. Worth it.</p>
       </section>
       <section className={styles.collectionCardSection}>
-        <Link aria-label="Shop Training Page" className={styles.collectionCard}>
+        <Link to="/shop/training" aria-label="Shop Training Page" className={styles.collectionCard}>
           <span>Shop Training</span>
         </Link>
-        <Link aria-label="Shop All Page" className={styles.collectionCard}>
-          <span>Shop Training</span>
+        <Link to="/shop/all" aria-label="Shop All Page" className={styles.collectionCard}>
+          <span>Shop All Products</span>
         </Link>
       </section>
     </>
