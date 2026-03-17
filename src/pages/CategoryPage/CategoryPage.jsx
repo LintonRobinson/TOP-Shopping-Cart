@@ -22,13 +22,16 @@ function CategoryPage() {
   let categoryProductsData;
   // Filter Products or Set Default Title
   if (storeProductsData !== null && category !== "all") {
-    categoryProductsData = storeProductsData.filter((productData) => productData.category === category);
     categoryTitle = category.charAt(0).toUpperCase() + category.slice(1);
   } else if (storeProductsData) {
-    categoryTitle = "All Products";
     categoryProductsData = storeProductsData;
   }
 
+  if (category !== "all") {
+    categoryTitle = category.charAt(0).toUpperCase() + category.slice(1);
+  } else {
+    categoryTitle = "All Products";
+  }
   if (storeProductsData) {
     categoryProductsData = categoryProductsData.map((productData) => ({
       ...productData,
@@ -44,11 +47,11 @@ function CategoryPage() {
     <main>
       <section className={styles.headingSection}>
         <h1>{categoryTitle}</h1>
-        <span>{!loadingState ? `${getNumberOfProducts(categoryProductsData)} Products` : <Skeleton count={1} height={20} />}</span>
+        <span>{!loadingState ? `${getNumberOfProducts(categoryProductsData)} Products` : <Skeleton count={1} height={20} width={100} />}</span>
       </section>
       <section className={styles.productCardsSection}>
         {!loadingState
-          ? categoryProductsData.map((storeProduct) => <ProductCard className={styles.productCard} key={storeProduct.id} cartProductData={storeProduct} />)
+          ? categoryProductsData.map((storeProduct) => <ProductCard className={styles.productCard} key={storeProduct.id} productData={storeProduct} productCategory={category} />)
           : Array.from({ length: 20 }).map((_, index) => <ProductCardSkeleton key={index} />)}
       </section>
     </main>
