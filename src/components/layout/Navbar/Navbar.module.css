@@ -1,4 +1,11 @@
 /******************************************
+/* BASE STYLES
+/*******************************************/
+a {
+  text-decoration: none;
+  color: inherit;
+}
+/******************************************
 /* TYPOGRAPHY
 /*******************************************/
 
@@ -10,8 +17,8 @@ nav {
 /* LAYOUT STYLES
 /*******************************************/
 
-nav {
-  width: 100%w;
+ul {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   padding: 7px;
@@ -22,15 +29,15 @@ nav {
   background-color: white;
 }
 
-nav > div {
+/* nav > div {
   width: 142px;
-}
+} */
 
-nav > div:nth-child(2) {
+ul > li:nth-child(2) {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 }
 
 .logoContainer {
@@ -38,7 +45,7 @@ nav > div:nth-child(2) {
 }
 
 img {
-  width: 100%;
+  max-width: 150px;
 }
 
 .navLink {
@@ -49,4 +56,32 @@ img {
 
 .navLink.active {
   color: #196bc1;
+}
+
+.navbarRight {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.shoppingBag {
+  position: relative;
+  padding-right: 12px;
+}
+
+.shoppingBagNumber {
+  font-size: 0.8rem;
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  top: -12px;
+  right: -2px;
+
+  color: white;
+  background-color: #196bc1;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+
+  align-items: center;
 }
