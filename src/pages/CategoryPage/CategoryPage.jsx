@@ -5,15 +5,6 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useParams } from "react-router";
 
-function ProductCardSkeleton() {
-  return (
-    <div>
-      <Skeleton height={142} />
-      <Skeleton count={2} />
-    </div>
-  );
-}
-
 function CategoryPage() {
   const { loadingState, storeProductsData } = useFetchProducts();
   const { category } = useParams();
@@ -28,16 +19,18 @@ function CategoryPage() {
     categoryProductsData = storeProductsData;
   }
 
+  // Filter products by category if category !== "all"
   if (category !== "all" && storeProductsData) {
     categoryProductsData = categoryProductsData.filter((categoryProductData) => categoryProductData.category === category);
   }
-
+  // Category first character to uppercase
   if (category !== "all") {
     categoryTitle = category.charAt(0).toUpperCase() + category.slice(1);
   } else {
     categoryTitle = "All Products";
   }
-  // Uppercase Category
+
+  // Capitalize first character in category property
   if (storeProductsData && categoryProductsData) {
     categoryProductsData = categoryProductsData.map((productData) => ({
       ...productData,
@@ -61,6 +54,15 @@ function CategoryPage() {
           : Array.from({ length: 20 }).map((_, index) => <ProductCardSkeleton key={index} />)}
       </section>
     </main>
+  );
+}
+
+function ProductCardSkeleton() {
+  return (
+    <div>
+      <Skeleton height={142} />
+      <Skeleton count={2} />
+    </div>
   );
 }
 
