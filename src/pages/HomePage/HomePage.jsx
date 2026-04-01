@@ -15,8 +15,8 @@ function HomePage() {
         <p>High-quality essentials, treats, and gear for city pups (and the people who love them). Easy to shop. Fast to grab. Worth it.</p>
       </section>
       <section className={styles.collectionCardSection}>
-        <Link to="/shop/training" aria-label="Shop Training Page" className={styles.collectionCard}>
-          <span>Shop Training</span>
+        <Link to="/shop/men" aria-label="Shop Training Page" className={styles.collectionCard}>
+          <span>Shop Favorites</span>
         </Link>
         <Link to="/shop/all" aria-label="Shop All Page" className={styles.collectionCard}>
           <span>Shop All Products</span>
