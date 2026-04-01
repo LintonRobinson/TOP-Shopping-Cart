@@ -13,7 +13,7 @@ describe("Footer", () => {
   });
 
   it("renders Shop Training link", () => {
-    expect(screen.getByRole("link", { name: "Shop Training Page" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Shop Women Page" })).toBeInTheDocument();
   });
 
   it("renders Shop All link", () => {

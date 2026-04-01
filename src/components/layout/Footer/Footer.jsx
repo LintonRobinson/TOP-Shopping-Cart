@@ -10,8 +10,12 @@ function Footer() {
           <div>
             <h3>Shop</h3>
             <div>
-              <Link aria-label="Shop Training Page">Shop Training</Link>
-              <Link aria-label="Shop All Page">Shop All</Link>
+              <Link to="/shop/women" aria-label="Shop Women Page">
+                Shop Favorites
+              </Link>
+              <Link to="/shop" aria-label="Shop All Page">
+                Shop All
+              </Link>
             </div>
           </div>
           <div>
