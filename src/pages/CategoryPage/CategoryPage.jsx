@@ -15,7 +15,7 @@ function ProductCardSkeleton() {
 }
 
 function CategoryPage() {
-  const { loadingState, storeProductsData, error } = useFetchProducts();
+  const { loadingState, storeProductsData } = useFetchProducts();
   const { category } = useParams();
 
   let categoryTitle;
@@ -23,8 +23,13 @@ function CategoryPage() {
   // Filter Products or Set Default Title
   if (storeProductsData !== null && category !== "all") {
     categoryTitle = category.charAt(0).toUpperCase() + category.slice(1);
+    categoryProductsData = storeProductsData;
   } else if (storeProductsData) {
     categoryProductsData = storeProductsData;
+  }
+
+  if (category !== "all" && storeProductsData) {
+    categoryProductsData = categoryProductsData.filter((categoryProductData) => categoryProductData.category === category);
   }
 
   if (category !== "all") {
@@ -32,7 +37,8 @@ function CategoryPage() {
   } else {
     categoryTitle = "All Products";
   }
-  if (storeProductsData) {
+  // Uppercase Category
+  if (storeProductsData && categoryProductsData) {
     categoryProductsData = categoryProductsData.map((productData) => ({
       ...productData,
       category: productData.category.charAt(0).toUpperCase() + productData.category.slice(1),
@@ -51,7 +57,7 @@ function CategoryPage() {
       </section>
       <section className={styles.productCardsSection}>
         {!loadingState
-          ? categoryProductsData.map((storeProduct) => <ProductCard className={styles.productCard} key={storeProduct.id} productData={storeProduct} productCategory={category} />)
+          ? categoryProductsData.map((storeProduct) => <ProductCard className={styles.productCard} key={storeProduct[["_id"]]} productData={storeProduct} productCategory={category} />)
           : Array.from({ length: 20 }).map((_, index) => <ProductCardSkeleton key={index} />)}
       </section>
     </main>
