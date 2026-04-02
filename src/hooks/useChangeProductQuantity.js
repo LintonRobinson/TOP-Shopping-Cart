@@ -1,42 +1,47 @@
 import { useEffect, useState } from "react";
-useEffect;
 
-function useChangeProductQuantity(previousCart, updatedProductId, updatedProductQuantity) {
-  const [loadingState, setLoadingState] = useState(true);
-  const [updatedUserCart, setUpdatedUserCart] = useState(null);
-  const [error, setError] = useState(null);
-  const previousUserCart = structuredClone(previousCart);
+function useChangeProductQuantity(previousCartProducts, updatedProductId) {
+  const [loadingState, setLoadingState] = useState(false);
+  const [error, setError] = useState(false);
 
-  const productIndexFromId = previousUserCart.products.findIndex((product) => product.productId === updatedProductId);
+  const changeProductQuantity = async (updatedProductQuantity) => {
+    setLoadingState(true);
+    const newUserCartProducts = structuredClone(previousCartProducts);
+    let productIndexFromId;
+    productIndexFromId = newUserCartProducts.findIndex((product) => product.id === Number(updatedProductId));
 
-  previousUserCart.products[productIndexFromId].quantity = updatedProductQuantity;
-  useEffect(() => {
-    const updateUserCart = async () => {
-      try {
-        const response = await fetch("https://fakestoreapi.com/carts/1", {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(previousUserCart),
-        });
+    if (productIndexFromId !== -1) {
+      newUserCartProducts[productIndexFromId].quantity = updatedProductQuantity;
+    } else {
+      newUserCartProducts.push({ id: updatedProductId, quantity: updatedProductQuantity });
+    }
 
-        if (!response.ok) {
-          throw Error("handles a failed PUT request");
-        }
+    if (productIndexFromId !== -1 && newUserCartProducts[productIndexFromId].quantity === 0) newUserCartProducts.splice(productIndexFromId, 1);
+    try {
+      const response = await fetch("https://dummyjson.com/carts/1", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          products: newUserCartProducts,
+        }),
+      });
 
-        const fetchedResponse = await response.json();
-        setUpdatedUserCart(fetchedResponse);
+      if (!response.ok) {
+        //setError(true);
         setLoadingState(false);
-      } catch (error) {
-        setError(error);
-        setLoadingState(false);
-      } finally {
-        setLoadingState(false);
+        return previousCartProducts;
       }
-    };
+      const fetchedResponse = await response.json();
+      setLoadingState(false);
+      return fetchedResponse;
+    } catch (error) {
+      //setError(true);
+      setLoadingState(false);
+      return previousCartProducts;
+    }
+  };
 
-    updateUserCart();
-  }, []);
-  return { loadingState, updatedUserCart, error };
+  return { changeProductQuantity, loadingState, error, setError };
 }
 
 export default useChangeProductQuantity;
