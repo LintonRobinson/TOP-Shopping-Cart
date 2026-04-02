@@ -1,0 +1,48 @@
+/******************************************
+/* BASE STYLES
+/*******************************************/
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.errorPage button {
+  background-color: #196bc1;
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  font-weight: 700;
+  transition: ease 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.errorPage button:hover {
+  background-color: #196ac19d;
+
+  text-decoration: none;
+  color: inherit;
+
+  font-weight: 700;
+  transition: ease 0.5s;
+}
+/******************************************
+/* TYPOGRAPHY
+/*******************************************/
+h1 {
+  font-size: 2rem;
+}
+
+/******************************************
+/* LAYOUT STYLES
+/*******************************************/
+
+.errorPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-grow: 1;
+}
