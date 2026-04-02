@@ -6,12 +6,12 @@ function useFetchProducts() {
   useEffect(() => {
     const fetchProductsData = async () => {
       try {
-        const response = await fetch("https://fakestoreapi.com/products");
+        const response = await fetch("https://fakestoreapiserver.reactbd.org/api/products");
         if (!response.ok) {
           throw Error("Network error: Something went wrong");
         }
         const fetchedStoreProductsData = await response.json();
-        setStoreProductsData(fetchedStoreProductsData);
+        setStoreProductsData(fetchedStoreProductsData.data);
         setLoadingState(false);
       } catch (err) {
         setError(err);

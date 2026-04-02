@@ -25,7 +25,7 @@ describe("useFetchProducts", () => {
   ];
 
   it("returns an initial loading state of true", async () => {
-    vi.spyOn(global, "fetch").mockResolvedValueOnce({ ok: true, json: () => Promise.resolve(mockedStoreProducts) });
+    vi.spyOn(global, "fetch").mockResolvedValueOnce({ ok: true, json: () => Promise.resolve({ data: mockedStoreProducts }) });
     const { result } = renderHook(() => useFetchProducts());
 
     expect(result.current.loadingState).toBe(true);
@@ -36,7 +36,7 @@ describe("useFetchProducts", () => {
   });
 
   it("successfully fetches all products", async () => {
-    vi.spyOn(global, "fetch").mockResolvedValueOnce({ ok: true, json: () => Promise.resolve(mockedStoreProducts) });
+    vi.spyOn(global, "fetch").mockResolvedValueOnce({ ok: true, json: () => Promise.resolve({ data: mockedStoreProducts }) });
     const { result } = renderHook(() => useFetchProducts());
     await waitFor(() => {
       expect(result.current.storeProductsData).toEqual(mockedStoreProducts);
@@ -44,7 +44,7 @@ describe("useFetchProducts", () => {
   });
 
   it("returns a loading state of false when fetch resolves", async () => {
-    vi.spyOn(global, "fetch").mockResolvedValueOnce({ ok: true, json: () => Promise.resolve(mockedStoreProducts) });
+    vi.spyOn(global, "fetch").mockResolvedValueOnce({ ok: true, json: () => Promise.resolve({ data: mockedStoreProducts }) });
     const { result } = renderHook(() => useFetchProducts());
 
     await waitFor(() => {
