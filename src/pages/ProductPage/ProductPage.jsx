@@ -4,22 +4,13 @@ import "react-loading-skeleton/dist/skeleton.css";
 import useFetchProduct from "../../hooks/useFetchProduct";
 import { useOutletContext, useParams } from "react-router";
 import ProductQuantitySelector from "../../components/ui/ProductQuantitySelector/ProductQuantitySelector.jsx";
-import UserCartModal from "../../components/ui/UserCartModal/UserCartModal.jsx";
 import { useEffect, useState } from "react";
+import AboutUs from "../../components/ui/AboutUs/AboutUs.jsx";
 
-function ProductPage({ productQuantity }) {
-  const [displayAddedToCartPopup, setDisplayAddedToCartPopup] = useState(false);
-
-  useEffect(() => {
-    const removeAddedToCartPopup = setTimeout(() => {
-      setDisplayAddedToCartPopup(false);
-    }, 6000);
-    return () => clearTimeout(removeAddedToCartPopup);
-  }, [displayAddedToCartPopup]);
+function ProductPage() {
   const { productId } = useParams();
-
   const [userCartProducts, handleCartUpdate] = useOutletContext();
-  const { loadingState, productData, error } = useFetchProduct(productId);
+  const { loadingState, productData, error } = useFetchProduct(Number(productId));
 
   let productCategory;
   let productPrice;
@@ -29,48 +20,19 @@ function ProductPage({ productQuantity }) {
     productPrice = productData.price.toFixed(2);
   }
 
-  let productQuantityButton;
-
-  if (productData) {
-    let productIndexInCart;
-    if (userCartProducts.length > 0) {
-      productIndexInCart = userCartProducts.findIndex((product) => product.productId === Number(productId));
-      productQuantityButton =
-        productIndexInCart > -1 ? (
-          <ProductQuantitySelector productQuantity={1} />
-        ) : (
-          <button
-            type=""
-            className={styles.button}
-            aria-label={`Add ${productData.title} To Cart`}
-            onClick={() => {
-              setDisplayAddedToCartPopup(true);
-            }}
-          >
-            Add To Cart
-          </button>
-        );
-    } else {
-      productQuantityButton = (
-        <button
-          type="button"
-          className={styles.button}
-          aria-label={`Add ${productData.title} To Cart`}
-          onClick={() => {
-            setDisplayAddedToCartPopup(true);
-          }}
-        >
-          Add To Cart
-        </button>
-      );
+  let productIndexInCart;
+  let productQuantity = 0;
+  if (userCartProducts.length > 0) {
+    productIndexInCart = userCartProducts.findIndex((product) => {
+      return product.id === Number(productId);
+    });
+    if (productIndexInCart > -1) {
+      productQuantity = userCartProducts[productIndexInCart].quantity;
     }
   }
 
-  function checkProductQuantity() {}
-
   return (
     <>
-      {/* <UserCartModal /> */}
       <main className={styles.productSectionWrapper}>
         <div className={styles.productSectionDesktop}>
           <div className={styles.productSectionImage}>{!loadingState ? <img src={productData.image} alt={productData.title} /> : <Skeleton height={415} width={400} />}</div>
@@ -79,7 +41,17 @@ function ProductPage({ productQuantity }) {
             <h1>{!loadingState ? productData.title : <Skeleton height={25} width={350} />}</h1>
             <h2>{!loadingState ? `$${productPrice}` : <Skeleton height={25} width={350} />}</h2>
             <p>{!loadingState ? productData.description : <Skeleton height={75} width={350} />}</p>
-            <div className={styles.productButtonWrapper}>{!loadingState && productQuantityButton}</div>
+            <div className={styles.productButtonWrapper}>
+              {!loadingState && (
+                <ProductQuantitySelector
+                  userCartProducts={userCartProducts}
+                  handleCartUpdate={handleCartUpdate}
+                  productQuantity={productQuantity}
+                  productId={productId}
+                  productTitle={productData.title}
+                />
+              )}
+            </div>
           </div>
         </div>
         <div className={styles.productSectionMobile}>
@@ -92,15 +64,22 @@ function ProductPage({ productQuantity }) {
           <div className={styles.productDetails}>
             <p>{!loadingState ? productData.description : <Skeleton height={75} width={350} />}</p>
           </div>
+          <div className={styles.productButtonWrapper}>
+            {!loadingState && (
+              <ProductQuantitySelector
+                userCartProducts={userCartProducts}
+                handleCartUpdate={handleCartUpdate}
+                productQuantity={productQuantity}
+                productId={productId}
+                productTitle={productData.title}
+              />
+            )}
+          </div>
         </div>
-        {displayAddedToCartPopup && <AddToCartPopUp />}
       </main>
+      <AboutUs />
     </>
   );
-}
-
-function AddToCartPopUp() {
-  return <span className={styles.addToCartPopUp}> Added To Cart ✅</span>;
 }
 
 export default ProductPage;

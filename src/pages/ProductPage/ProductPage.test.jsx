@@ -11,7 +11,7 @@ import { Skeleton } from "react-loading-skeleton";
 
 describe("Product Page", () => {
   const mockedProductData = {
-    id: 1,
+    _id: 1,
     title: "Twisted Latigo Dog Lead",
     price: 53.3,
     description: "Made from the same high-quality leather as the popular Latigo line, these top-of-the-line leads offer a sophisticated style alternative.",
@@ -67,16 +67,7 @@ describe("Product Page", () => {
 
   it("renders the fetched products image", () => {
     useFetchProduct.mockReturnValue({ loadingState: false, productData: mockedProductData, error: null });
-    useOutletContext.mockReturnValue([
-      {
-        id: 1,
-        userId: 1,
-        date: "2020-03-02T00:00:00.000Z",
-        products: [],
-        __v: 0,
-      },
-      vi.fn(),
-    ]);
+    useOutletContext.mockReturnValue([[], vi.fn()]);
     render(<ProductPage />);
     const productImage = screen.getAllByRole("img", { name: mockedProductData.title });
 
@@ -85,16 +76,7 @@ describe("Product Page", () => {
 
   it("renders the fetched products category", () => {
     useFetchProduct.mockReturnValue({ loadingState: false, productData: mockedProductData, error: null });
-    useOutletContext.mockReturnValue([
-      {
-        id: 1,
-        userId: 1,
-        date: "2020-03-02T00:00:00.000Z",
-        products: ["ya mama"],
-        __v: 0,
-      },
-      vi.fn(),
-    ]);
+    useOutletContext.mockReturnValue([[], vi.fn()]);
     render(<ProductPage />);
     const productCategory = screen.getAllByRole("heading", { name: mockedProductData.category });
 
@@ -104,16 +86,7 @@ describe("Product Page", () => {
 
   it("renders the fetched products title", () => {
     useFetchProduct.mockReturnValue({ loadingState: false, productData: mockedProductData, error: null });
-    useOutletContext.mockReturnValue([
-      {
-        id: 1,
-        userId: 1,
-        date: "2020-03-02T00:00:00.000Z",
-        products: ["ya mama"],
-        __v: 0,
-      },
-      vi.fn(),
-    ]);
+    useOutletContext.mockReturnValue([[], vi.fn()]);
     render(<ProductPage />);
     const productTitle = screen.getAllByRole("heading", { name: mockedProductData.title });
     expect(productTitle).toHaveLength(2);
@@ -140,16 +113,7 @@ describe("Product Page", () => {
 
   it("renders the fetched products description", () => {
     useFetchProduct.mockReturnValue({ loadingState: false, productData: mockedProductData, error: null });
-    useOutletContext.mockReturnValue([
-      {
-        id: 1,
-        userId: 1,
-        date: "2020-03-02T00:00:00.000Z",
-        products: ["ya mama"],
-        __v: 0,
-      },
-      vi.fn(),
-    ]);
+    useOutletContext.mockReturnValue([[], vi.fn()]);
     render(<ProductPage />);
     const productDescription = screen.getAllByText(mockedProductData.description);
     useOutletContext.mockReturnValue([
@@ -166,74 +130,41 @@ describe("Product Page", () => {
     expect(productDescription[0]).toBeInTheDocument();
   });
 
-  it("renders an Add To Cart button if the product is not in the users cart", () => {
+  it("renders a ProductQuantitySelector button", () => {
     useFetchProduct.mockReturnValue({ loadingState: false, productData: mockedProductData, error: null });
-    useOutletContext.mockReturnValue([
-      {
-        id: 1,
-        userId: 1,
-        date: "2020-03-02T00:00:00.000Z",
-        products: [],
-        __v: 0,
-      },
-      vi.fn(),
-    ]);
-    render(<ProductPage />);
-
-    const addToCartButton = screen.getByRole("button", { name: `Add ${mockedProductData.title} To Cart` });
-    expect(addToCartButton).toBeInTheDocument();
-  });
-
-  it("renders a ProductQuantitySelector button if the product is in the users cart", () => {
-    useFetchProduct.mockReturnValue({ loadingState: false, productData: mockedProductData, error: null });
-    useOutletContext.mockReturnValue([
-      [
-        {
-          productId: 1,
-          quantity: 1,
-        },
-        vi.fn(),
-      ],
-
-      vi.fn(),
-    ]);
+    useOutletContext.mockReturnValue([[{ id: 1, quantity: 1 }], vi.fn()]);
     render(<ProductPage />);
 
     expect(ProductQuantitySelector).toHaveBeenCalled();
   });
 
-  it("renders the Added to Cart pop up when the Add To Cart button is clicked", async () => {
+  it("passes the correct productQuantity when the product is in the cart", () => {
     useFetchProduct.mockReturnValue({ loadingState: false, productData: mockedProductData, error: null });
-    useOutletContext.mockReturnValue([[], vi.fn()]);
-    const user = userEvent.setup();
+    useOutletContext.mockReturnValue([[{ id: 1, quantity: 1 }], vi.fn()]);
     render(<ProductPage />);
-    const addToCartButton = screen.getByRole("button", { name: `Add ${mockedProductData.title} To Cart` });
-    await user.click(addToCartButton);
-    await waitFor(() => {
-      expect(screen.getByText("Added To Cart ✅")).toBeInTheDocument();
-    });
+
+    expect(ProductQuantitySelector).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        productQuantity: 1,
+        productId: "1",
+        productTitle: mockedProductData.title,
+      }),
+      undefined,
+    );
   });
 
-  it("removes the Added to Cart pop up after 6 seconds of being rendered", async () => {
+  it("passes productQuantity of 0 when the product is not in the cart", () => {
     useFetchProduct.mockReturnValue({ loadingState: false, productData: mockedProductData, error: null });
     useOutletContext.mockReturnValue([[], vi.fn()]);
-    const user = userEvent.setup();
     render(<ProductPage />);
-    const addToCartButton = screen.getByRole("button", { name: `Add ${mockedProductData.title} To Cart` });
-    await user.click(addToCartButton);
-    await waitFor(() => {
-      expect(screen.getByText("Added To Cart ✅")).toBeInTheDocument();
-    });
 
-    await waitForElementToBeRemoved(() => screen.queryByText("Added To Cart ✅"), { timeout: 7000 });
-
-    expect(screen.queryByText("Added To Cart ✅")).not.toBeInTheDocument();
-  }, 10000);
-
-  /*
-  it("renders ProductQuantitySelector and reflects products quantity", () => {
-    useFetchProduct.mockReturnValue({ loadingState: false, productData: mockedProductData, error: null });
-    render(<ProductPage />);
+    expect(ProductQuantitySelector).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        productQuantity: 0,
+        productId: "1",
+        productTitle: mockedProductData.title,
+      }),
+      undefined,
+    );
   });
-  */
 });
