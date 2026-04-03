@@ -178,7 +178,6 @@ TOP-Shopping-Cart/
 ### Linton Robinson
 
 - GitHub: [@LintonRobinson](https://github.com/LintonRobinson)
-- LinkedIn: https://linkedin.com/in/yourhandle
 
 ## 📄 License
 
