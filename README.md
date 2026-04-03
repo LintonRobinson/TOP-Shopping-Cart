@@ -10,7 +10,7 @@
     <img src="https://img.shields.io/static/v1?label=&message=Vitest&color=6E9F18&style=for-the-badge&logo=vitest&logoColor=white">
   </div>
   <br>
-  <h3><b><a href="#live-demo">🔗 View Live Demo</a></b></h3>
+  <h3><b><a href="https://top-shopping-cart-63z.pages.dev/">🔗 View Live Demo</a></b></h3>
 </div>
 
 ## 📖 Overview
