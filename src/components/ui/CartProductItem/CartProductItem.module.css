@@ -1,0 +1,116 @@
+/******************************************
+/* TYPOGRAPHY
+/*******************************************/
+
+.cartProductTitle {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.cartProductCategory {
+  font-size: 0.9rem;
+  color: #196bc1;
+  font-weight: 500;
+}
+
+.cartProductPrice {
+  font-size: 1rem;
+}
+
+/******************************************
+/* BASE STYLES
+/*******************************************/
+
+.removeProductFromCartButton {
+  background-color: #c12f19;
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 700;
+  transition: ease 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1.3px solid rgb(0, 0, 0);
+  border-radius: 4px;
+}
+
+.removeProductFromCartButton:hover {
+  background-color: #c12f199f;
+
+  text-decoration: none;
+  color: inherit;
+
+  font-weight: 700;
+  transition: ease 0.5s;
+}
+
+/******************************************
+/* LAYOUT STYLES
+/*******************************************/
+
+.cartProductItem {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(135, 135, 135, 0.726);
+  padding-bottom: 25px;
+}
+
+@media (max-width: 375px) {
+  .cartProductItem {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+.cartProductItemLeft {
+  display: flex;
+  max-width: 350px;
+}
+
+.cartProductItem img {
+  width: 100px;
+  height: 100px;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+  object-position: center;
+}
+
+.cartProductTextDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cartItemButtonWrapper {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.loadingRemoveCartProducItem {
+  width: 137px;
+  height: 38px;
+}
+
+@media (max-width: 727px) {
+  .cartItemButtonWrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 483px) {
+  .cartProductItem {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .cartItemButtonWrapper {
+    flex-direction: row;
+  }
+}
