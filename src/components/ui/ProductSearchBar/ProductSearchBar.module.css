@@ -1,0 +1,225 @@
+/******************************************
+/* BASE STYLES
+/*******************************************/
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+input {
+  border: none;
+  outline: none;
+  background: none;
+}
+
+/******************************************
+/* TYPOGRAPHY
+/*******************************************/
+
+.searchResultsHeading span:nth-child(1) {
+  font-size: 1.2rem;
+}
+
+.searchResultsHeading span:nth-child(2) {
+  font-size: 0.9rem;
+  color: rgb(81, 81, 81);
+}
+
+.searchResultsLoading h1,
+.searchResultsLoadingMobile h1 {
+  font-size: 1.2rem;
+  margin-right: 20px;
+}
+
+.searchResultsLoadingMobile button {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+/******************************************
+/* LAYOUT STYLES
+/*******************************************/
+.desktopSearchBarWrapper {
+}
+
+.desktopSearchBar {
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: 2px solid black;
+}
+
+.desktopSearchBar:focus-within {
+  border: 2px solid #196bc1;
+  outline: none;
+}
+
+.searchResults {
+  width: 100vw;
+  position: absolute;
+  padding: 0 20px 20px 20px;
+  left: 0px;
+  top: 100%;
+  background-color: white;
+  border-top: #196ac13d 1px solid;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: scroll;
+  box-shadow: 0px 8px 29px -30px #196bc1;
+}
+
+.searchResultsLoading {
+  width: 100vw;
+  position: absolute;
+  padding: 20px;
+  left: 0px;
+  top: 100%;
+  background-color: white;
+  border-top: #196ac13d 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  overflow: scroll;
+  box-shadow: 0px 8px 29px -30px #196bc1;
+  border-radius: 4px;
+}
+
+.searchResultsHeading {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  border-bottom: #8080803d 1px solid;
+  padding: 15px 0;
+  position: sticky;
+  top: 0;
+  background-color: white;
+}
+
+.searchResultItems {
+  display: flex;
+  gap: 5px;
+  flex-grow: 0;
+}
+
+.searchProductItem {
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+  transition: ease 0.5s;
+  border: none;
+  padding: 15px 25px;
+  border: 2px solid #196ac100;
+}
+
+.searchProductItem:hover {
+  border: 2px solid #196bc1;
+  transition: ease 0.5s;
+  border-radius: 4px;
+}
+
+.searchProductItem span:nth-child(2) {
+  font-size: 1.1rem;
+  font-weight: 600;
+  align-self: flex-start;
+}
+
+.searchProductItem span:nth-child(3) {
+  color: #777777;
+  font-weight: 500;
+  align-self: flex-start;
+}
+
+.searchProductItem span:nth-child(4) {
+  color: #196bc1;
+  align-self: flex-start;
+}
+
+.searchProductItem img {
+  width: 80%;
+  object-fit: contain;
+}
+
+.tryAgainButton {
+  background-color: #c13219;
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 700;
+  transition: ease 0.5s;
+  border: 1.3px solid rgb(0, 0, 0);
+}
+
+.tryAgainButton:hover {
+  background-color: #c1321980;
+  color: black;
+
+  transition: ease 0.5s;
+}
+
+@media (min-width: 660px) {
+  .mobileSearchBarWrapper {
+    display: none;
+  }
+}
+
+@media (max-width: 660px) {
+  .desktopSearchBarWrapper {
+    display: none;
+  }
+
+  .searchResultItems {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    justify-content: space-between;
+  }
+  .searchProductItem {
+    width: 100%;
+    padding: 5px;
+  }
+}
+
+@media (max-width: 415px) {
+  .searchResultItems {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.searchResultsLoadingMobile {
+  width: 100vw;
+  height: 100%;
+  position: absolute;
+  padding: 20px;
+  left: 0px;
+  top: 0;
+  background-color: white;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  overflow: scroll;
+  box-shadow: 0px 8px 29px -30px #196bc1;
+  border-radius: 4px;
+  z-index: 7;
+}
+
+.searchResultsLoadingMobile > div:nth-child(1) {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+}
+
+.searchResultsLoadingMobile > div:nth-child(1) input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+}
