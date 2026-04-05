@@ -17,6 +17,12 @@ nav {
 /* LAYOUT STYLES
 /*******************************************/
 
+header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
 ul {
   width: 100%;
   display: flex;
